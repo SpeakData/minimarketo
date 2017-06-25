@@ -122,17 +122,17 @@ func (rt *restRoundTripper) RoundTrip(req *http.Request) (*http.Response, error)
 }
 
 // ClientConfig stores client configuration
-// ID: Marketo client ID
-// Secret: Marketo client secret
-// Endpoint: https://xxx-xxx-xxx.mktorest.com
-// Timeout, optional: default http timeout is 60 seconds
-// Debug, optional: a flag to show logging output
 type ClientConfig struct {
-	ID       string
-	Secret   string
+	// ID: Marketo client ID
+	ID string
+	// Secret: Marketo client secret
+	Secret string
+	// Endpoint: https://xxx-xxx-xxx.mktorest.com
 	Endpoint string
-	Timeout  uint
-	Debug    bool
+	// Timeout, optional: default http timeout is 60 seconds
+	Timeout uint
+	// Debug, optional: a flag to show logging output
+	Debug bool
 }
 
 // NewClient returns a new Marketo Client
@@ -326,10 +326,10 @@ func (c *client) Delete(resource string, data []byte) (response *Response, err e
 }
 
 // TokenInfo holds authentication token and time at which expires.
-// Token is the currently active token
-// Expires shows what time the token expires
 type TokenInfo struct {
-	Token   string
+	// Token is the currently active token.
+	Token string
+	// Expires shows what time the token expires
 	Expires time.Time
 }
 

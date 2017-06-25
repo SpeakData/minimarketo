@@ -1,5 +1,8 @@
 # MiniMarketo
 
+[![GoDoc](https://godoc.org/github.com/SpeakData/minimarketo?status.svg)](https://godoc.org/github.com/SpeakData/minimarketo)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/SpeakData/minimarketo/master/LICENSE)
+
 Inspired by the [FrenchBen/goketo](https://github.com/FrenchBen/goketo), we created MiniMarketo which is a very tiny client for Marketo REST API.
 
 It is very different from goketo as it doesn't do much.
