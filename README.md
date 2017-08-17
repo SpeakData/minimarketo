@@ -30,7 +30,8 @@ Basic operations are:
 2. Make a http call (Marketo API only supports GET, POST, DELETE) with url string and data in []byte if needed
 3. Check "success" and parse "result" with your struct
 
-First, create a client
+First, create a client.
+In this example, I'm passing configuration through environment variables.
 ```go
 config := minimarketo.ClientConfig{
     ID:       os.Getenv("MARKETO_ID"),
