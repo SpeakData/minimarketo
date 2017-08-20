@@ -240,8 +240,8 @@ const (
 		"result":[{"id":12345,"email":"tester@example.com"}],
 		"success":true
 	}`
-	findLeadPath        = "/leads.json?filterType=email&fields=email&filterValues=tester@example.com"
-	invalidFindLeadPath = "leads.json?filterType=email&fields=email&filterValues=tester@example.com"
+	findLeadPath        = "/rest/v1/leads.json?filterType=email&fields=email&filterValues=tester@example.com"
+	invalidFindLeadPath = "/rest/v1leads.json?filterType=email&fields=email&filterValues=tester@example.com"
 )
 
 func TestGetErrorWith500(t *testing.T) {
@@ -315,7 +315,7 @@ func TestGetErrorWithNoBody(t *testing.T) {
 		if called != 2 {
 			t.Errorf("Expected only two calls: %d", called)
 		}
-		expectedError := fmt.Sprintf("No body! Check URL: %s/rest/v1%s", ts.URL, invalidFindLeadPath)
+		expectedError := fmt.Sprintf("No body! Check URL: %s%s", ts.URL, invalidFindLeadPath)
 		if err.Error() != expectedError {
 			t.Errorf("Expected %s, got %s", expectedError, err)
 		}
@@ -635,7 +635,7 @@ type RemoveFromListRequest struct {
 func TestDeleteSuccess(t *testing.T) {
 	listID := 1000
 	inputID := 3
-	path := fmt.Sprintf("/lists/%d/leads.json", listID)
+	path := fmt.Sprintf("/rest/v1/lists/%d/leads.json", listID)
 	called := 0
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
@@ -649,9 +649,8 @@ func TestDeleteSuccess(t *testing.T) {
 			w.Write([]byte(fmt.Sprintf(authResponseSuccess, token)))
 		} else {
 			// check path
-			expectedPath := "/rest/v1" + path
-			if r.URL.EscapedPath() != expectedPath {
-				t.Errorf("Expected path to be %s, got %s", expectedPath, r.URL.EscapedPath())
+			if r.URL.EscapedPath() != path {
+				t.Errorf("Expected path to be %s, got %s", path, r.URL.EscapedPath())
 			}
 
 			// check method
@@ -738,7 +737,7 @@ type CreateLeadRequest struct {
 }
 
 func TestPostSuccess(t *testing.T) {
-	path := "/leads.json"
+	path := "/rest/v1/leads.json"
 	email := "tester@example.com"
 	firstName := "John"
 	lastName := "Doe"
@@ -755,9 +754,8 @@ func TestPostSuccess(t *testing.T) {
 			w.Write([]byte(fmt.Sprintf(authResponseSuccess, token)))
 		} else {
 			// check path
-			expectedPath := "/rest/v1" + path
-			if r.URL.EscapedPath() != expectedPath {
-				t.Errorf("Expected path to be %s, got %s", expectedPath, r.URL.EscapedPath())
+			if r.URL.EscapedPath() != path {
+				t.Errorf("Expected path to be %s, got %s", path, r.URL.EscapedPath())
 			}
 
 			// check method

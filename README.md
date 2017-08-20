@@ -49,7 +49,7 @@ Then, call Marketo supported http calls: GET, POST, or DELETE.
 
 Find a lead
 ```go
-path := "/leads.json?"
+path := "/rest/v1/leads.json?"
 v := url.Values{
     "filterType":   {"email"},
     "filterValues": {"tester@example.com"},
@@ -73,7 +73,7 @@ for _, lead := range leads {
 
 Create a lead
 ```go
-path := "/leads.json"
+path := "/rest/v1/leads.json"
 type Input struct {
     Email     string `json:"email"`
     FirstName string `json:"firstName"`

@@ -14,7 +14,6 @@ import (
 const (
 	// DefaultTimeout is http client timeout and 60 seconds
 	DefaultTimeout = 60
-	restBase       = "/rest/v1"
 	identityBase   = "/identity"
 	identityPath   = "/oauth/token"
 )
@@ -80,7 +79,7 @@ type client struct {
 	authClient       *http.Client
 	restClient       *http.Client
 	restRoundTripper *restRoundTripper
-	restEndpoint     string
+	endpoint         string
 	identityEndpoint string
 	authLock         sync.Mutex
 	auth             *AuthToken
@@ -159,7 +158,7 @@ func NewClient(config ClientConfig) (Client, error) {
 			Transport: &rRT,
 		},
 		restRoundTripper: &rRT,
-		restEndpoint:     config.Endpoint + restBase,
+		endpoint:         config.Endpoint,
 		identityEndpoint: config.Endpoint + identityBase + identityPath,
 		debug:            config.Debug,
 	}
@@ -284,7 +283,7 @@ func (c *client) Get(resource string) (response *Response, err error) {
 			log.Print("[minimarketo/Get] DONE")
 		}()
 	}
-	req, err := http.NewRequest("GET", c.restEndpoint+resource, nil)
+	req, err := http.NewRequest("GET", c.endpoint+resource, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -299,7 +298,7 @@ func (c *client) Post(resource string, data []byte) (response *Response, err err
 			log.Print("[minimarketo/Post] DONE")
 		}()
 	}
-	req, err := http.NewRequest("POST", c.restEndpoint+resource, bytes.NewBuffer(data))
+	req, err := http.NewRequest("POST", c.endpoint+resource, bytes.NewBuffer(data))
 	if err != nil {
 		return nil, err
 	}
@@ -316,7 +315,7 @@ func (c *client) Delete(resource string, data []byte) (response *Response, err e
 			log.Print("[minimarketo/Delete] DONE")
 		}()
 	}
-	req, err := http.NewRequest("DELETE", c.restEndpoint+resource, bytes.NewBuffer(data))
+	req, err := http.NewRequest("DELETE", c.endpoint+resource, bytes.NewBuffer(data))
 	if err != nil {
 		return nil, err
 	}
