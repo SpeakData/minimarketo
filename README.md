@@ -15,7 +15,7 @@ Other than that, MiniMarketo acts very much like a http client. So all you have 
 - use MiniMarketo client to call a URL along with data if needed
 - define JSON struct and parse result
 
-MiniMarketo, instead of covering all the Marketo REST API calls, acts as a thin wrapper for Marketo REST API.
+MiniMarketo, instead of covering all the Marketo REST API calls, acts as a thin wrapper for Marketo REST API. Currently it only supports JSON API. Most "bulk" endpoints are not supported as it requires sending and downloading files.
 
 ## Installation
 
